@@ -19,3 +19,4 @@ samples, guidance on mobile development, and a full API reference.
 # BingeVibes
 # BingeVibes
 # BingeVibes
+# Binge-Vibes
