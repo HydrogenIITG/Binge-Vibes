@@ -1,26 +1,24 @@
-
 import 'package:flutter/material.dart';
 import 'package:bingevibes/DetailScreen/checker.dart';
 import 'package:bingevibes/components/repttext.dart';
 import 'package:bingevibes/components/apikey.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:convert';
-
 import 'package:motion_tab_bar/MotionTabBarController.dart';
 
-class searchbarfun extends StatefulWidget {  final String title;
+class searchbarfun extends StatefulWidget {
+  final String title;
   final MotionTabBarController controller;
-  const searchbarfun({super.key,required this.title,
-    required this.controller});
+  const searchbarfun(
+      {super.key, required this.title, required this.controller});
 
   @override
   State<searchbarfun> createState() => _searchbarfunState();
 }
 
 class _searchbarfunState extends State<searchbarfun> {
-
   List<Map<String, dynamic>> searchresult = [];
 
   Future<void> searchlistfunction(val) async {
@@ -64,278 +62,253 @@ class _searchbarfunState extends State<searchbarfun> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // print("tapped");
         FocusManager.instance.primaryFocus?.unfocus();
         showlist = !showlist;
       },
       child: Padding(
-          padding:
-              const EdgeInsets.only(left: 10.0, top: 30, bottom: 20, right: 10),
-          child: Column(
-            children: [
-              Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: const BorderRadius.all(Radius.circular(10))),
-                child: TextField(
-                  autofocus: false,
-                  controller: searchtext,
-                  onSubmitted: (value) {
-                    searchresult.clear();
-                    setState(() {
-                      val1 = value;
-                      FocusManager.instance.primaryFocus?.unfocus();
-                    });
-                  },
-                  onChanged: (value) {
-                    searchresult.clear();
+        padding:
+            const EdgeInsets.only(left: 10.0, top: 30, bottom: 20, right: 10),
+        child: Column(
+          children: [
+            Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  color: Colors.red.shade100,
+                  borderRadius: const BorderRadius.all(Radius.circular(10))),
+              child: TextField(
+                autofocus: false,
+                controller: searchtext,
+                onSubmitted: (value) {
+                  searchresult.clear();
+                  setState(() {
+                    val1 = value;
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  });
+                },
+                onChanged: (value) {
+                  searchresult.clear();
 
-                    setState(() {
-                      val1 = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          Fluttertoast.showToast(
-                              webBgColor: "#000000",
-                              webPosition: "center",
-                              webShowClose: true,
-                              msg: "Search Cleared",
-                              toastLength: Toast.LENGTH_LONG,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 2,
-                              backgroundColor: const Color.fromRGBO(18, 18, 18, 1),
-                              textColor: Colors.white,
-                              fontSize: 16.0);
+                  setState(() {
+                    val1 = value;
+                  });
+                },
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        Fluttertoast.showToast(
+                            webBgColor: "#000000",
+                            webPosition: "center",
+                            webShowClose: true,
+                            msg: "Search Cleared",
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 2,
+                            backgroundColor: Colors.red.shade50,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
 
-                          setState(() {
-                            searchtext.clear();
-                            FocusManager.instance.primaryFocus?.unfocus();
-                          });
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios_rounded,
-                          color: Colors.red.withOpacity(0.6),
-                        ),
+                        setState(() {
+                          searchtext.clear();
+                          FocusManager.instance.primaryFocus?.unfocus();
+                        });
+                      },
+                      icon: Icon(
+                        FontAwesomeIcons.rotateLeft,
+                        color: Colors.red.withOpacity(0.6),
                       ),
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: Colors.red,
-                      ),
-                      hintText: 'Search',
-                      hintStyle:
-                          TextStyle(color: Colors.white.withOpacity(0.2)),
-                      border: InputBorder.none),
-                ),
+                    ),
+                    prefixIcon: const Icon(
+                      FontAwesomeIcons.searchengin,
+                      color: Colors.red,
+                    ),
+                    hintText: 'Search',
+                    hintStyle: TextStyle(color: Colors.red.withOpacity(0.5)),
+                    border: InputBorder.none),
               ),
-              //
-              //
-              const SizedBox(
-                height: 5,
-              ),
-
-              searchtext.text.isNotEmpty
-                  ? FutureBuilder(
-                      future: searchlistfunction(val1),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return SizedBox(
-                              height: 400,
-                              child: ListView.builder(
-                                  itemCount: searchresult.length,
-                                  scrollDirection: Axis.vertical,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      descriptioncheckui(
-                                                        searchresult[index]
-                                                            ['id'],
-                                                        searchresult[index]
-                                                            ['media_type'],
-                                                      )));
-                                        },
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            searchtext.text.isNotEmpty
+                ? FutureBuilder(
+                    future: searchlistfunction(val1),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return Expanded(
+                          child: SizedBox(
+                            child: ListView.builder(
+                              itemCount: searchresult.length,
+                              scrollDirection: Axis.vertical,
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            descriptioncheckui(
+                                          searchresult[index]['id'],
+                                          searchresult[index]['media_type'],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.only(
+                                        top: 4, bottom: 4),
+                                    height: 180,
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade700,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10))),
+                                    child: Row(children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(10)),
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    'https://image.tmdb.org/t/p/w500${searchresult[index]['poster_path']}'),
+                                                fit: BoxFit.fill)),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
                                         child: Container(
-                                            margin: const EdgeInsets.only(
-                                                top: 4, bottom: 4),
-                                            height: 180,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            decoration: const BoxDecoration(
-                                                color: Color.fromRGBO(
-                                                    20, 20, 20, 1),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10))),
-                                            child: Row(children: [
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
                                               Container(
+                                                child: Row(
+                                                  children: [
+                                                    //vote average box
+                                                    Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              5),
+                                                      height: 30,
+                                                      // width:
+                                                      //     100,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.amber
+                                                              .withOpacity(0.2),
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          6))),
+                                                      child: Center(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            const Icon(
+                                                              Icons.star,
+                                                              color:
+                                                                  Colors.amber,
+                                                              size: 20,
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            ratingtext(
+                                                                '${searchresult[index]['vote_average']}')
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+
+                                                    //popularity
+                                                    Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              5),
+                                                      height: 30,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.amber
+                                                              .withOpacity(0.2),
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          8))),
+                                                      child: Center(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            const Icon(
+                                                              Icons
+                                                                  .people_outline_sharp,
+                                                              color:
+                                                                  Colors.amber,
+                                                              size: 20,
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            ratingtext(
+                                                                '${searchresult[index]['popularity']}')
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width *
                                                     0.4,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
-                                                    image: DecorationImage(
-                                                        //color filter
-
-                                                        image: NetworkImage(
-                                                            'https://image.tmdb.org/t/p/w500${searchresult[index]['poster_path']}'),
-                                                        fit: BoxFit.fill)),
+                                                height: 85,
+                                                child: Text(
+                                                  textAlign: TextAlign.left,
+                                                  ' ${searchresult[index]['overview']}',
+                                                  style: const TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.white),
+                                                ),
                                               ),
-                                              const SizedBox(
-                                                width: 20,
-                                              ),
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Container(
-                                                      child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                        ///////////////////////
-                                                        //media type
-                                                        Container(
-                                                          alignment: Alignment
-                                                              .topCenter,
-                                                          child: tittletext(
-                                                            '${searchresult[index]['media_type']}',
-                                                          ),
-                                                        ),
-
-                                                        Container(
-                                                          child: Row(
-                                                            children: [
-                                                              //vote average box
-                                                              Container(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(5),
-                                                                height: 30,
-                                                                // width:
-                                                                //     100,
-                                                                decoration: BoxDecoration(
-                                                                    color: Colors
-                                                                        .amber
-                                                                        .withOpacity(
-                                                                            0.2),
-                                                                    borderRadius:
-                                                                        const BorderRadius.all(
-                                                                            Radius.circular(6))),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      const Icon(
-                                                                        Icons
-                                                                            .star,
-                                                                        color: Colors
-                                                                            .amber,
-                                                                        size:
-                                                                            20,
-                                                                      ),
-                                                                      const SizedBox(
-                                                                        width:
-                                                                            5,
-                                                                      ),
-                                                                      ratingtext(
-                                                                          '${searchresult[index]['vote_average']}')
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 10,
-                                                              ),
-
-                                                              //popularity
-                                                              Container(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(5),
-                                                                height: 30,
-                                                                decoration: BoxDecoration(
-                                                                    color: Colors
-                                                                        .amber
-                                                                        .withOpacity(
-                                                                            0.2),
-                                                                    borderRadius:
-                                                                        const BorderRadius.all(
-                                                                            Radius.circular(8))),
-                                                                child: Center(
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      const Icon(
-                                                                        Icons
-                                                                            .people_outline_sharp,
-                                                                        color: Colors
-                                                                            .amber,
-                                                                        size:
-                                                                            20,
-                                                                      ),
-                                                                      const SizedBox(
-                                                                        width:
-                                                                            5,
-                                                                      ),
-                                                                      ratingtext(
-                                                                          '${searchresult[index]['popularity']}')
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-
-                                                              //
-                                                            ],
-                                                          ),
-                                                        ),
-
-                                                        SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.4,
-                                                            height: 85,
-                                                            child: Text(
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                ' ${searchresult[index]['overview']}',
-                                                                // 'dsfsafsdffdsfsdf sdfsadfsdf sadfsafd',
-                                                                style: const TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: Colors
-                                                                        .white)))
-                                                      ])))
-                                            ])));
-                                  }));
-                        } else {
-                          return const Center(
-                              child: CircularProgressIndicator(
-                            color: Colors.amber,
-                          ));
-                        }
-                      })
-                  : Container(),
-            ],
-          )),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        );
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.red,
+                          ),
+                        );
+                      }
+                    },
+                  )
+                : Container(),
+          ],
+        ),
+      ),
     );
   }
 }

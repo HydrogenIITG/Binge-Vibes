@@ -4,6 +4,7 @@ import 'package:bingevibes/Pages/sign_in.dart';
 import 'package:bingevibes/Pages/watchlist.dart';
 import 'package:bingevibes/Pages/welcome.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:motion_tab_bar/MotionTabBar.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,7 +78,7 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
         ),
         items: [
           SidebarXItem(
-            icon: Icons.account_circle_sharp,
+            icon: FontAwesomeIcons.user,
             label: 'My Account',
             onTap: () => Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
@@ -86,7 +87,7 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
                 (route) => false),
           ),
           SidebarXItem(
-            icon: Icons.notifications_sharp,
+            icon: FontAwesomeIcons.bell,
             label: 'Notifications',
             onTap: () => Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
@@ -95,7 +96,7 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
                 (route) => false),
           ),
           SidebarXItem(
-            icon: Icons.settings_sharp,
+            icon: FontAwesomeIcons.gear,
             label: 'Settings',
             onTap: () => showDialog(
               context: context,
@@ -112,7 +113,7 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
         ],
         footerItems: [
           SidebarXItem(
-            icon: Icons.logout_sharp,
+            icon: FontAwesomeIcons.arrowRightFromBracket,
             label: 'logout',
             onTap: () async {
               var sharedPref = await SharedPreferences.getInstance();
@@ -133,9 +134,9 @@ class _MyHomeState extends State<MyHome> with TickerProviderStateMixin {
         initialSelectedTab: "Home",
         labels: const ["Home", "Search", "Watchlist"],
         icons: const [
-          Icons.home,
-          Icons.search_sharp,
-          Icons.play_circle_outline_sharp
+          FontAwesomeIcons.houseUser,
+          FontAwesomeIcons.searchengin,
+          FontAwesomeIcons.play,
         ],
         tabSize: 50,
         tabBarHeight: 55,

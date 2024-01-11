@@ -6,7 +6,7 @@ import 'dart:io';
 class FavMovielist {
   static const dbname = 'favlist.db';
   static const dbversion = 1;
-  static const tablename = 'favoriatelist';
+  static const tablename = 'favoritelist';
   static const columnId = 'id';
   static const columnfavid = 'tmdbid';
   static const columnfavtype = 'tmdbtype';

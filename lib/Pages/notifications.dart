@@ -9,45 +9,37 @@ class Notifications extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.red.shade100,
-      body: SafeArea(
+      body: const SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(Icons.notifications_sharp),
-                const Text(
-                  'Notifications',
-                  style: TextStyle(
-                    fontFamily: 'Solitreo',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextButton(
-                  onPressed: read(),
-                  child: const Text('Mark all as read'),
-                )
-              ],
+            Text(
+              'Notifications',
+              style: TextStyle(
+                fontFamily: 'Solitreo',
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(
+            SizedBox(
               height: 50,
             ),
-            const Text(
+            Text(
               'No notifications to show',
               style: TextStyle(
                 fontFamily: 'Solitreo',
                 fontSize: 16,
               ),
+              textAlign: TextAlign.center,
             )
           ],
         ),
       ),
-      floatingActionButton: ElevatedButton.icon(
+      floatingActionButton: ElevatedButton(
         style: const ButtonStyle(
             foregroundColor: MaterialStatePropertyAll(Colors.red)),
         onPressed: () => Navigator.of(context).pushAndRemoveUntil(
@@ -55,8 +47,7 @@ class Notifications extends StatelessWidget {
               builder: (context) => const MyHome(),
             ),
             (route) => false),
-        icon: const Icon(Icons.door_back_door_sharp),
-        label: const Text('Back'),
+        child: const Text('Back'),
       ),
     );
   }

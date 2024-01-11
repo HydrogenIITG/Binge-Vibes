@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:bingevibes/components/trailer.dart';
 
 // ignore: must_be_immutable
 class MovieDetails extends StatefulWidget {
@@ -28,11 +29,16 @@ class _MovieDetailsState extends State<MovieDetails> {
   List MoviesGeneres = [];
 
   Future Moviedetails() async {
-    var moviedetailurl = 'https://api.themoviedb.org/3/movie/${widget.id}?api_key=$apikey';
-    var UserReviewurl = 'https://api.themoviedb.org/3/movie/${widget.id}/reviews?api_key=$apikey';
-    var similarmoviesurl = 'https://api.themoviedb.org/3/movie/${widget.id}/similar?api_key=$apikey';
-    var recommendedmoviesurl = 'https://api.themoviedb.org/3/movie/${widget.id}/recommendations?api_key=$apikey';
-    var movietrailersurl = 'https://api.themoviedb.org/3/movie/${widget.id}/videos?api_key=$apikey';
+    var moviedetailurl =
+        'https://api.themoviedb.org/3/movie/${widget.id}?api_key=$apikey';
+    var UserReviewurl =
+        'https://api.themoviedb.org/3/movie/${widget.id}/reviews?api_key=$apikey';
+    var similarmoviesurl =
+        'https://api.themoviedb.org/3/movie/${widget.id}/similar?api_key=$apikey';
+    var recommendedmoviesurl =
+        'https://api.themoviedb.org/3/movie/${widget.id}/recommendations?api_key=$apikey';
+    var movietrailersurl =
+        'https://api.themoviedb.org/3/movie/${widget.id}/videos?api_key=$apikey';
 
     var moviedetailresponse = await http.get(Uri.parse(moviedetailurl));
     if (moviedetailresponse.statusCode == 200) {
@@ -125,12 +131,6 @@ class _MovieDetailsState extends State<MovieDetails> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.bottom]);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
   }
 
   @override
@@ -145,44 +145,49 @@ class _MovieDetailsState extends State<MovieDetails> {
                   physics: const BouncingScrollPhysics(),
                   slivers: [
                     SliverAppBar(
-                        automaticallyImplyLeading: false,
-                        leading: IconButton(
+                      automaticallyImplyLeading: false,
+                      leading: IconButton(
+                          onPressed: () {
+                            SystemChrome.setEnabledSystemUIMode(
+                                SystemUiMode.manual,
+                                overlays: [SystemUiOverlay.bottom]);
+
+                            SystemChrome.setPreferredOrientations([
+                              DeviceOrientation.portraitUp,
+                              DeviceOrientation.portraitDown,
+                            ]);
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(FontAwesomeIcons.circleArrowLeft),
+                          iconSize: 28,
+                          color: Colors.white),
+                      actions: [
+                        IconButton(
                             onPressed: () {
-                              SystemChrome.setEnabledSystemUIMode(
-                                  SystemUiMode.manual,
-                                  overlays: [SystemUiOverlay.bottom]);
-                             
-                              SystemChrome.setPreferredOrientations([
-                                DeviceOrientation.portraitUp,
-                                DeviceOrientation.portraitDown,
-                              ]);
-                              Navigator.pop(context);
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const MyHome()),
+                                  (route) => false);
                             },
-                            icon: const Icon(FontAwesomeIcons.circleArrowLeft),
-                            iconSize: 28,
-                            color: Colors.white),
-                        actions: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const MyHome()),
-                                    (route) => false);
-                              },
-                              icon: const Icon(FontAwesomeIcons.houseUser),
-                              iconSize: 25,
-                              color: Colors.white)
-                        ],
-                        backgroundColor: const Color.fromRGBO(18, 18, 18, 0.5),
-                        centerTitle: false,
-                        pinned: true,
-                        expandedHeight:
-                            MediaQuery.of(context).size.height * 0.4,
-                        flexibleSpace: const FlexibleSpaceBar(
-                          collapseMode: CollapseMode.parallax,
+                            icon: const Icon(FontAwesomeIcons.houseUser),
+                            iconSize: 25,
+                            color: Colors.white)
+                      ],
+                      backgroundColor: const Color.fromRGBO(18, 18, 18, 0.5),
+                      centerTitle: false,
+                      pinned: true,
+                      expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                      flexibleSpace:  FlexibleSpaceBar(
+                        collapseMode: CollapseMode.parallax,
+                        background: FittedBox(
+                            fit: BoxFit.fill,
+                            child: trailerwatch(
+                              trailerytid: movietrailerslist[0]['key'],
+                            ),
                           ),
-                        ),
+                      ),
+                    ),
                     SliverList(
                         delegate: SliverChildListDelegate([
                       addtofavorite(
@@ -190,12 +195,12 @@ class _MovieDetailsState extends State<MovieDetails> {
                         type: 'movie',
                         Details: MovieDetails,
                       ),
-
                       Column(
                         children: [
                           Row(children: [
                             Container(
-                                padding: const EdgeInsets.only(left: 10, top: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 10, top: 10),
                                 height: 50,
                                 width: MediaQuery.of(context).size.width,
                                 child: ListView.builder(
@@ -205,11 +210,12 @@ class _MovieDetailsState extends State<MovieDetails> {
                                     itemBuilder: (context, index) {
                                       //generes box
                                       return Container(
-                                          margin: const EdgeInsets.only(right: 10),
+                                          margin:
+                                              const EdgeInsets.only(right: 10),
                                           padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
-                                              color:
-                                                  const Color.fromRGBO(25, 25, 25, 1),
+                                              color: const Color.fromRGBO(
+                                                  25, 25, 25, 1),
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                           child:
@@ -220,10 +226,12 @@ class _MovieDetailsState extends State<MovieDetails> {
                             children: [
                               Container(
                                   padding: const EdgeInsets.all(10),
-                                  margin: const EdgeInsets.only(left: 10, top: 10),
+                                  margin:
+                                      const EdgeInsets.only(left: 10, top: 10),
                                   height: 40,
                                   decoration: BoxDecoration(
-                                      color: const Color.fromRGBO(25, 25, 25, 1),
+                                      color:
+                                          const Color.fromRGBO(25, 25, 25, 1),
                                       borderRadius: BorderRadius.circular(10)),
                                   child: genrestext(
                                       '${MovieDetails[0]['runtime']} min'))
@@ -238,20 +246,22 @@ class _MovieDetailsState extends State<MovieDetails> {
                           padding: const EdgeInsets.only(left: 20, top: 10),
                           child: overviewtext(
                               MovieDetails[0]['overview'].toString())),
-
                       Padding(
                         padding: const EdgeInsets.only(left: 20, top: 10),
                         child: ReviewUI(revdeatils: UserREviews),
                       ),
                       Padding(
                           padding: const EdgeInsets.only(left: 20, top: 20),
-                          child: normaltext('Release Date : ${MovieDetails[0]['release_date']}')),
+                          child: normaltext(
+                              'Release Date : ${MovieDetails[0]['release_date']}')),
                       Padding(
                           padding: const EdgeInsets.only(left: 20, top: 20),
-                          child: normaltext('Budget : ${MovieDetails[0]['budget']}')),
+                          child: normaltext(
+                              'Budget : ${MovieDetails[0]['budget']}')),
                       Padding(
                           padding: const EdgeInsets.only(left: 20, top: 20),
-                          child: normaltext('Revenue : ${MovieDetails[0]['revenue']}')),
+                          child: normaltext(
+                              'Revenue : ${MovieDetails[0]['revenue']}')),
                       sliderlist(similarmovieslist, "Similar Movies", "movie",
                           similarmovieslist.length),
                       sliderlist(recommendedmovieslist, "Recommended Movies",
@@ -261,7 +271,7 @@ class _MovieDetailsState extends State<MovieDetails> {
             } else {
               return const Center(
                   child: CircularProgressIndicator(
-                color: Colors.amber,
+                color: Colors.red,
               ));
             }
           }),

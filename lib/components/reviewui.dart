@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:bingevibes/components/repttext.dart';
-// import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class ReviewUI extends StatefulWidget {
@@ -30,7 +29,7 @@ class _ReviewUIState extends State<ReviewUI> {
                   child: Text(
                     'User Reviews',
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
@@ -47,20 +46,20 @@ class _ReviewUIState extends State<ReviewUI> {
                           ? Text(
                               'All Reviews ' '${REviewDetails.length} ',
                               style: const TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                             )
                           : const Text(
                               'Show Less',
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                             ),
                       const Icon(
                         Icons.arrow_forward_ios,
-                        color: Colors.white,
+                        color: Colors.black,
                         size: 20,
                       )
                     ],
@@ -115,7 +114,7 @@ class _ReviewUIState extends State<ReviewUI> {
                                                 child: Text(
                                                   REviewDetails[index]['name'],
                                                   style: const TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -128,7 +127,7 @@ class _ReviewUIState extends State<ReviewUI> {
                                                 REviewDetails[index]
                                                     ['creationdate'],
                                                 style: const TextStyle(
-                                                    color: Colors.white,
+                                                    color: Colors.black,
                                                     fontSize: 12,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -159,7 +158,7 @@ class _ReviewUIState extends State<ReviewUI> {
                                             child: Text(
                                               REviewDetails[index]['rating'],
                                               style: const TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.black,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -221,7 +220,7 @@ class _ReviewUIState extends State<ReviewUI> {
                                         child: Text(
                                           REviewDetails[0]['name'],
                                           style: const TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.black,
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -232,7 +231,7 @@ class _ReviewUIState extends State<ReviewUI> {
                                       Text(
                                         REviewDetails[0]['creationdate'],
                                         style: const TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontSize: 12,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -261,7 +260,7 @@ class _ReviewUIState extends State<ReviewUI> {
                                     child: Text(
                                       REviewDetails[0]['rating'],
                                       style: const TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
                                     ),

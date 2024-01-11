@@ -47,10 +47,10 @@ class _FavoriateMoviesState extends State<FavoriateMovies> {
                   ),
                 ),
                 DropdownButton(
-                  iconEnabledColor: Colors.red.shade100,
+                  iconEnabledColor: Colors.red.shade400,
                   focusColor: Colors.white,
                   iconDisabledColor: Colors.white,
-                  dropdownColor: const Color.fromRGBO(18, 18, 18, 0.5),
+                  dropdownColor: Colors.grey,
                   value: svalue,
                   items: const [
                     DropdownMenuItem(
@@ -123,7 +123,7 @@ class _FavoriateMoviesState extends State<FavoriateMovies> {
                               },
                               child: Card(
                                 child: ListTile(
-                                  tileColor: const Color.fromRGBO(24, 24, 24, 1),
+                                  tileColor:  Colors.grey.shade800,
                                   textColor: Colors.white,
                                   title:
                                       Text(snapshot.data![index]['tmdbname']),
