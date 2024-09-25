@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "771548540279",
+    "project_id": "binge-vibes",
+    "storage_bucket": "binge-vibes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771548540279:android:dffad09023ff10d3fb8572",
+        "android_client_info": {
+          "package_name": "com.bingevibes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN1Z8h_UQnaeEr-i-X72ZQ5SJcU2MxnIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
